@@ -1,0 +1,93 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.section {
+  text-align: center;
+  margin: 50px auto; /* Adjust the margin as needed */
+}
+
+#polytechnicsSection h2,
+#coursesSection h2,
+#studentsSection h2 {
+  color: #111;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+/* Additional styling for the polytechnics section */
+#rpHotspot {
+  position: absolute;
+  top: 50px;
+  left: 1000px; /* Increased left by 400 */
+  width: 20px;
+  height: 20px;
+  background-color: yellow;
+  border-radius: 50%;
+  cursor: pointer;
+}
+#npHotspot {
+  position: absolute;
+  top: 150px;
+  left: 950px; /* Increased left by 400 */
+  width: 20px;
+  height: 20px;
+  background-color: yellow;
+  border-radius: 50%;
+  cursor: pointer;
+}
+#spHotspot {
+  position: absolute;
+  top: 180px;
+  left: 980px; /* Increased left by 400 */
+  width: 20px;
+  height: 20px;
+  background-color: yellow;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#nypHotspot {
+  position: absolute;
+  top: 80px;
+  left: 1100px; /* Increased left by 400 */
+  width: 20px;
+  height: 20px;
+  background-color: yellow;
+  border-radius: 50%;
+  cursor: pointer;
+}
+#tpHotspot {
+  position: absolute;
+  top: 150px;
+  left: 1200px; /* Increased left by 400 */
+  width: 20px;
+  height: 20px;
+  background-color: yellow;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Additional styling for the courses section */
+#courseTable {
+  width: 80%;
+  margin: 0 auto;
+}
+
+/* Additional styling for the students section */
+#studentsChart {
+  width: 80%;
+  margin: 0 auto;
+  display: block;
+}
+
+img {
+  padding-left: 800px;
+  height: 60%;
+}
+#courseTable {
+  width: 100%;
+  font-size: 14px;
+}

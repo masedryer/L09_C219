@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Polytechnics in Singapore</title>
+
+    <!-- Add the CDN links for Tippy.js, jQuery, DataTables, and Chart.js here -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css"
+    />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <!-- Link to styles.css -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tippy.js@6.3.2/dist/tippy-bundle.umd.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+
+  <body>
+    <!-- Section 1: Polytechnics in Singapore -->
+    <div class="section" id="polytechnicsSection">
+      <h2>Polytechnics in Singapore</h2>
+      <!-- Singapore Map with Yellow Circle Hotspot -->
+      <div style="position: relative; width: 600px; height: 500px">
+        <img src="singapore.png" alt="Singapore Map" />
+
+        <!-- Yellow Circle Hotspot with Tippy.js tooltip -->
+        <div id="rpHotspot"></div>
+        <div id="spHotspot"></div>
+        <div id="npHotspot"></div>
+        <div id="nypHotspot"></div>
+        <div id="tpHotspot"></div>
+      </div>
+    </div>
+
+    <div class="section" id="coursesSection">
+      <h2>Courses in Republic Polytechnic</h2>
+      <!-- Interactive DataTable for RP Diploma Courses -->
+      <div style="max-width: 800px; margin: 0 auto">
+        <table id="courseTable">
+          <thead>
+            <tr>
+              <th>School</th>
+              <th>Course Name</th>
+              <th>Course Abbreviation</th>
+              <th>Course Code</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Add tbody with course data dynamically -->
+          </tbody>
+          <!-- Add tbody with course data dynamically -->
+        </table>
+      </div>
+    </div>
+
+    <!-- Section 3: Student Population -->
+    <div class="section" id="studentsSection">
+      <h2>Student Population</h2>
+      <!-- Chart.js Chart for Number of Students in Each Polytechnic -->
+      <div>
+        <canvas id="studentsChart" width="100" height="30"></canvas>
+      </div>
+    </div>
+
+    <script>
+      // Tippy.js initialization for the hotspot tooltip
+      tippy("#rpHotspot", {
+        content: "Republic Polytechnic",
+      });
+      tippy("#spHotspot", {
+        content: "Singapore Polytechnic",
+      });
+      tippy("#npHotspot", {
+        content: "Ngee Ann Polytechnic",
+      });
+      tippy("#nypHotspot", {
+        content: "Nanyang Polytechnic",
+      });
+      tippy("#tpHotspot", {
+        content: "Temasek Polytechnic",
+      });
+
+      // DataTable initialization
+      $(document).ready(function () {
+        // DataTable initialization with sample data
+        var sampleData = [
+          {
+            School: "School of Applied Science",
+            "Course Name": "Diploma in Biomedical Science",
+            "Course Abbreviation": "DBMS",
+            "Course Code": "R14",
+          },
+          {
+            School: "School of Applied Science",
+            "Course Name": "Diploma in Biotechnology",
+            "Course Abbreviation": "DBIO",
+            "Course Code": "R16",
+          },
+          {
+            School: "School of Applied Science",
+            "Course Name": "Diploma in Environmental Science",
+            "Course Abbreviation": "DENV",
+            "Course Code": "R29",
+          },
+          {
+            School: "School of Applied Science",
+            "Course Name": "Diploma in Marine Science & Aquaculture",
+            "Course Abbreviation": "DMAC",
+            "Course Code": "R53",
+          },
+          {
+            School: "School of Applied Science",
+            "Course Name": "Diploma in Materials Science",
+            "Course Abbreviation": "DMTS",
+            "Course Code": "R17",
+          },
+          {
+            School: "School of Applied Science",
+            "Course Name": "Diploma in Pharmaceutical Science",
+            "Course Abbreviation": "DPHM",
+            "Course Code": "R22",
+          },
+          {
+            School: "School of Applied Science",
+            "Course Name": "Common Science Programme",
+            "Course Abbreviation": "CSP",
+            "Course Code": "R59",
+          },
+          {
+            School: "School of Engineering",
+            "Course Name": "Diploma in Aerospace Engineering",
+            "Course Abbreviation": "DAE",
+            "Course Code": "R40",
+          },
+          {
+            School: "School of Engineering",
+            "Course Name": "Diploma in Aviation Management",
+            "Course Abbreviation": "DAVM",
+            "Course Code": "R39",
+          },
+          {
+            School: "School of Engineering",
+            "Course Name": "Diploma in Engineering Design with Business",
+            "Course Abbreviation": "DEDB",
+            "Course Code": "R56",
+          },
+          {
+            School: "School of Engineering",
+            "Course Name": "Diploma in Electrical & Electronic Engineering",
+            "Course Abbreviation": "DEEE",
+            "Course Code": "R50",
+          },
+          {
+            School: "School of Engineering",
+            "Course Name": "Diploma in Engineering Systems & Management",
+            "Course Abbreviation": "DESM",
+            "Course Code": "R54",
+          },
+          {
+            School: "School of Engineering",
+            "Course Name": "Diploma in Green Building Energy Management",
+            "Course Abbreviation": "DGEM",
+            "Course Code": "R41",
+          },
+          {
+            School: "School of Engineering",
+            "Course Name": "Diploma in Supply Chain Management",
+            "Course Abbreviation": "DSCM",
+            "Course Code": "R21",
+          },
+          {
+            School: "School of Engineering",
+            "Course Name": "Common Engineering Programme",
+            "Course Abbreviation": "CEP",
+            "Course Code": "R42",
+          },
+          {
+            School: "School of Hospitality",
+            "Course Name": "Diploma in Integrated Events Management",
+            "Course Abbreviation": "DIEM",
+            "Course Code": "R28",
+          },
+          {
+            School: "School of Hospitality",
+            "Course Name":
+              "Diploma in Customer Experience Management with Business",
+            "Course Abbreviation": "DCXB",
+            "Course Code": "R34",
+          },
+          {
+            School: "School of Hospitality",
+            "Course Name": "Diploma in Hotel & Hospitality Management",
+            "Course Abbreviation": "DHHM",
+            "Course Code": "R37",
+          },
+          {
+            School: "School of Hospitality",
+            "Course Name": "Diploma in Restaurant & Culinary Operations",
+            "Course Abbreviation": "DRCO",
+            "Course Code": "R46",
+          },
+          {
+            School: "School of Hospitality",
+            "Course Name": "Diploma in Wellness & Hospitality Business",
+            "Course Abbreviation": "DWHB",
+            "Course Code": "R44",
+          },
+          {
+            School: "School of InfoComm",
+            "Course Name": "Diploma in Financial Technology",
+            "Course Abbreviation": "DFT",
+            "Course Code": "R18",
+          },
+          {
+            School: "School of InfoComm",
+            "Course Name": "Diploma in Business Information Systems",
+            "Course Abbreviation": "DBIS",
+            "Course Code": "R13",
+          },
+          {
+            School: "School of InfoComm",
+            "Course Name": "Diploma in Information Technology",
+            "Course Abbreviation": "DIT",
+            "Course Code": "R12",
+          },
+          {
+            School: "School of InfoComm",
+            "Course Name": "Diploma in Digital Design & Development",
+            "Course Abbreviation": "DDDD",
+            "Course Code": "R47",
+          },
+          {
+            School: "School of InfoComm",
+            "Course Name": "Diploma in Infocomm Security Management",
+            "Course Abbreviation": "DISM",
+            "Course Code": "R55",
+          },
+          {
+            School: "School of Management and Communication",
+            "Course Name": "Diploma in Consumer Behaviour & Research",
+            "Course Abbreviation": "DCBR",
+            "Course Code": "R48",
+          },
+          {
+            School: "School of Management and Communication",
+            "Course Name":
+              "Diploma in Human Resource Management with Psychology",
+            "Course Abbreviation": "DHRMP",
+            "Course Code": "R52",
+          },
+          {
+            School: "School of Management and Communication",
+            "Course Name": "Diploma in Mass Communication",
+            "Course Abbreviation": "DMC",
+            "Course Code": "R32",
+          },
+          {
+            School: "School of Management and Communication",
+            "Course Name": "Diploma in Business",
+            "Course Abbreviation": "DBIZ",
+            "Course Code": "R60",
+          },
+          {
+            School: "School of Management and Communication",
+            "Course Name": "Common Business Programme",
+            "Course Abbreviation": "CBP",
+            "Course Code": "R57",
+          },
+          {
+            School: "School of Sports, Health and Leisure",
+            "Course Name": "Diploma in Health Management & Promotion",
+            "Course Abbreviation": "DHMP",
+            "Course Code": "R43",
+          },
+          {
+            School: "School of Sports, Health and Leisure",
+            "Course Name": "Diploma in Health Services Management",
+            "Course Abbreviation": "DHSM",
+            "Course Code": "R45",
+          },
+          {
+            School: "School of Sports, Health and Leisure",
+            "Course Name": "Diploma in Outdoor & Adventure Learning",
+            "Course Abbreviation": "DOAL",
+            "Course Code": "R33",
+          },
+          {
+            School: "School of Sports, Health and Leisure",
+            "Course Name": "Diploma in Sport Coaching",
+            "Course Abbreviation": "DSC",
+            "Course Code": "R49",
+          },
+          {
+            School: "School of Sports, Health and Leisure",
+            "Course Name": "Diploma in Sport & Exercise Science",
+            "Course Abbreviation": "DSES",
+            "Course Code": "R26",
+          },
+          {
+            School: "School of Technology for the Arts",
+            "Course Name": "Diploma in Design for User Experience",
+            "Course Abbreviation": "DDUX",
+            "Course Code": "R36",
+          },
+          {
+            School: "School of Technology for the Arts",
+            "Course Name": "Diploma in Game Design",
+            "Course Abbreviation": "DGD",
+            "Course Code": "R35",
+          },
+          {
+            School: "School of Technology for the Arts",
+            "Course Name": "Diploma in Media Production & Design",
+            "Course Abbreviation": "DMPD",
+            "Course Code": "R19",
+          },
+          {
+            School: "School of Technology for the Arts",
+            "Course Name": "Diploma in Sonic Arts",
+            "Course Abbreviation": "DSA",
+            "Course Code": "R24",
+          },
+          {
+            School: "School of Technology for the Arts",
+            "Course Name": "Diploma in Arts & Theatre Management",
+            "Course Abbreviation": "DATM",
+            "Course Code": "R25",
+          },
+        ];
+
+        $("#courseTable").DataTable({
+          data: sampleData,
+          columns: [
+            { data: "School" },
+            { data: "Course Name" },
+            { data: "Course Abbreviation" },
+            { data: "Course Code" },
+          ],
+        });
+      });
+      // Chart.js initialization for students chart
+      var ctx = document.getElementById("studentsChart").getContext("2d");
+      var studentsChart = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: [
+            "Republic Polytechnic",
+            "Temasek Polytechnic",
+            "Ngee Ann Polytechnic",
+            "Nanyang Polytechnic",
+            "Singapore Polytechnic",
+          ],
+          datasets: [
+            {
+              label: "Number of Students",
+              backgroundColor: [
+                "#FF6987",
+                "#FFD700",
+                "#7CFC00",
+                "#00BFFF",
+                "#9932CC",
+              ],
+              data: [14400, 13000, 14800, 16220, 15900],
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: "Number of Students",
+              },
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
